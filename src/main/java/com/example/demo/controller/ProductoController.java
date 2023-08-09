@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/productos")
 public class ProductoController {
     @Autowired
     private ProductoService productoService;
-
 
     @PostMapping
     public ResponseEntity<Producto> guardarProducto(@RequestBody Producto producto) {
@@ -30,19 +28,19 @@ public class ProductoController {
     @GetMapping("/{id}")
     public ResponseEntity<Producto> obtenerPorId(@PathVariable Integer id) {
         Producto producto = productoService.obtenerPorId(id).orElse(null);
-
         return ResponseEntity.ok(producto);
     }
 
-
-
     @PutMapping("/{id}")
     public ResponseEntity<Producto> actualizarProducto(@PathVariable Integer id, @RequestBody Producto producto) {
-        ResponseEntity<Producto> response = null;
-        if (producto.getId() != null && productoService.obtenerPorId(producto.getId()).isPresent())
+        ResponseEntity<Producto> response;
+        Producto existingProducto = productoService.obtenerPorId(id).orElse(null);
+        if (existingProducto != null) {
+            producto.setId(existingProducto.getId());
             response = ResponseEntity.ok(productoService.actualizarProducto(producto));
-        else
+        } else {
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
         return response;
     }
 

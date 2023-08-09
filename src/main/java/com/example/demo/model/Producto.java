@@ -4,6 +4,8 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 
+import java.util.Optional;
+
 
 @Entity
 @Table(name = "productos")
@@ -16,13 +18,27 @@ public class Producto {
     private double precio;
     private String descripcion;
 
+
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
     public Producto() {
     }
 
-    public Producto(String nombre, double precio, String descripcion) {
+    public Producto(String nombre, double precio, String descripcion, Categoria categoria) {
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
+        this.categoria = categoria;
     }
 
     public Integer getId() {
@@ -55,5 +71,6 @@ public class Producto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-}
+    }}
+
+
