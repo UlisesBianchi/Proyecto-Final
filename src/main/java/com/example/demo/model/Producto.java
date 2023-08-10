@@ -21,6 +21,10 @@ public class Producto {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
+    @ManyToOne
+    @JoinColumn(name = "reservas_id")
+    private Reserva reservas;
+
     public Categoria getCategoria() {
         return categoria;
     }
