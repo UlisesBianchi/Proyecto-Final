@@ -30,12 +30,7 @@ public class ReservaController {
     @GetMapping("/{id}")
     public ResponseEntity< Reserva> obtenerReservaPorId(@PathVariable("id")Integer id){
         Optional<Reserva> reservaBuscado=reservaService.busarReserva(id);
-        if(reservaBuscado.isPresent()){
-            return ResponseEntity.ok(reservaBuscado.get());
-        }
-        else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        return reservaBuscado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
 // registrar una reserva

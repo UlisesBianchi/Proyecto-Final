@@ -13,7 +13,7 @@ import java.util.Optional;
 @RequestMapping("/categorias")
 public class CategoriaController {
   @Autowired
-    private CategoriaService categoriaService;
+    private final CategoriaService categoriaService;
 
     public CategoriaController(CategoriaService categoriaService) {
         this.categoriaService = categoriaService;
