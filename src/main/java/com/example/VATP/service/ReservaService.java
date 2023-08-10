@@ -10,7 +10,7 @@ public interface ReservaService {
 
 
     List<Reserva> listarReserva();
-    Optional<Reserva> busarReserva(Integer id);
+    Optional<Reserva> buscarReserva(Integer id);
     Reserva guardarReserva(Reserva reserva);
     Reserva actualizarReserva(Reserva reserva);
 

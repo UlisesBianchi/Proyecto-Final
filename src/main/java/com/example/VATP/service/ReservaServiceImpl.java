@@ -21,7 +21,7 @@ public class ReservaServiceImpl implements ReservaService{
     public List<Reserva> listarReserva() {return reservaRepository.findAll();}
 
     @Override
-    public Optional<Reserva> busarReserva(Integer id) {
+    public Optional<Reserva> buscarReserva(Integer id) {
         return Optional.empty();
     }
 
